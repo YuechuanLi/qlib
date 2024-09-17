@@ -1,0 +1,168 @@
+
+# Python 3.10 Compatibility Analysis for Qlib Setup.py
+
+## Overview
+This document analyzes the compatibility of the dependencies listed in the `setup.py` file for Qlib when upgrading to Python 3.10.
+
+## Summary of Findings
+- **Python 3.7 and 3.8** are fully supported and should work seamlessly with the current setup.
+- Upgrading to **Python 3.10** is possible, but some dependencies will need to be upgraded or thoroughly tested for compatibility.
+
+## Detailed Dependency Analysis
+
+1. **numpy>=1.12.0, <1.24**
+   - **Status:** Compatible with Python 3.10.
+   - **Comment:** Ensure you're using the latest version within this range.
+
+2. **pandas>=0.25.1**
+   - **Status:** Compatible with Python 3.10.
+   - **Comment:** Pandas versions from 1.3 onwards are generally recommended for Python 3.10.
+
+3. **scipy>=1.7.3**
+   - **Status:** Compatible with Python 3.10.
+   - **Comment:** Ensure that you use SciPy 1.7.3 or newer.
+
+4. **requests>=2.18.0**
+   - **Status:** Compatible with Python 3.10.
+   - **Comment:** Requests are well-supported across different Python versions, including 3.10.
+
+5. **sacred>=0.7.4**
+   - **Status:** Generally compatible, but verify with the latest version.
+   - **Comment:** Sacred's newer versions should support Python 3.10.
+
+6. **python-socketio**
+   - **Status:** Likely compatible with Python 3.10.
+   - **Comment:** Ensure you're using a recent version that supports Python 3.10.
+
+7. **redis>=3.0.1**
+   - **Status:** Compatible with Python 3.10.
+   - **Comment:** The `redis` library has consistent support across Python versions.
+
+8. **python-redis-lock>=3.3.1**
+   - **Status:** Should be compatible, but verify with the latest version.
+   - **Comment:** Check for any updates that specifically mention Python 3.10 compatibility.
+
+9. **schedule>=0.6.0**
+   - **Status:** Compatible with Python 3.10.
+   - **Comment:** The `schedule` library is well-maintained and should work with Python 3.10.
+
+10. **cvxpy>=1.0.21**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Ensure you are using a recent version that supports Python 3.10.
+
+11. **hyperopt==0.1.2**
+    - **Status:** **Potential Issue.**
+    - **Comment:** The version specified is quite old. You might need to upgrade to a newer version that supports Python 3.10, or this could cause compatibility issues.
+
+12. **fire>=0.3.1**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Recent versions of `fire` should work fine.
+
+13. **statsmodels**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Ensure you use an up-to-date version.
+
+14. **xlrd>=1.0.0**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Use the latest version if working with `.xls` files. Note that `.xlsx` support requires `openpyxl`.
+
+15. **plotly>=4.12.0**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Upgrading to the latest `plotly` version is recommended.
+
+16. **matplotlib>=3.3**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Matplotlib 3.3 and newer versions are well-supported.
+
+17. **tables>=3.6.1**
+    - **Status:** Likely compatible, but verify with the latest version.
+    - **Comment:** `tables` should support Python 3.10, but check for the latest updates.
+
+18. **pyyaml>=5.3.1**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Ensure you use the latest `pyyaml` version.
+
+19. **mlflow>=1.12.1, <=1.30.0**
+    - **Status:** **Potential Issue.**
+    - **Comment:** Versions up to 1.30.0 should work, but newer versions (2.0+) need verification. Compatibility with Python 3.10 should be tested carefully.
+
+20. **packaging<22**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** The restriction to `packaging<22` should not conflict with Python 3.10.
+
+21. **tqdm**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Regular updates ensure compatibility.
+
+22. **loguru**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Use a recent version.
+
+23. **lightgbm>=3.3.0**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** LightGBM is regularly updated and should work with Python 3.10.
+
+24. **tornado**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Tornado is well-maintained and should work with Python 3.10.
+
+25. **joblib>=0.17.0**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Ensure you use the latest version.
+
+26. **ruamel.yaml<=0.17.36**
+    - **Status:** **Potential Issue.**
+    - **Comment:** The restriction on `ruamel.yaml` might cause issues. This version may not be fully compatible with Python 3.10.
+
+27. **pymongo==3.7.2**
+    - **Status:** **Potential Issue.**
+    - **Comment:** This version is quite old. Upgrading to a newer version of `pymongo` might be necessary for Python 3.10 compatibility.
+
+28. **scikit-learn>=0.22**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Use the latest version within this range.
+
+29. **dill**
+    - **Status:** Likely compatible, but verify with the latest version.
+    - **Comment:** Ensure compatibility with Python 3.10 by using the latest version.
+
+30. **dataclasses;python_version<'3.7'**
+    - **Status:** Not applicable to Python 3.10.
+    - **Comment:** Dataclasses are built-in from Python 3.7 onwards.
+
+31. **filelock**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Regular updates ensure compatibility.
+
+32. **jinja2**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Use a recent version.
+
+33. **gym**
+    - **Status:** Likely compatible, but verify with the latest version.
+    - **Comment:** Gym should support Python 3.10, but check for the latest updates.
+
+34. **protobuf<=3.20.1;python_version<='3.8'**
+    - **Status:** **Not applicable to Python 3.10.**
+    - **Comment:** You will need to upgrade `protobuf` to a version compatible with Python 3.10.
+
+35. **cryptography**
+    - **Status:** Compatible with Python 3.10.
+    - **Comment:** Ensure you use the latest version.
+
+## Potential Issues When Upgrading to Python 3.10
+
+- **Hyperopt (v0.1.2):** This is an older version that might not be compatible with Python 3.10. Consider upgrading to a newer version.
+- **MLflow:** Compatibility beyond version 1.30.0 needs verification. Test with Python 3.10 before full deployment.
+- **Ruamel.yaml:** The specific version constraint may cause issues; updating or testing for compatibility is recommended.
+- **Pymongo (v3.7.2):** This is quite old, and upgrading to a newer version is advised for Python 3.10 compatibility.
+- **Protobuf:** The current constraint applies to Python 3.8 and below, so you will need to use a newer version for Python 3.10.
+
+## Conclusion
+
+While most dependencies should work with Python 3.10, there are a few that might cause issues, such as `hyperopt`, `mlflow`, `ruamel.yaml`, `pymongo`, and `protobuf`. Before upgrading to Python 3.10, you would need to:
+
+1. **Upgrade** these problematic dependencies to versions that are confirmed to work with Python 3.10.
+2. **Test** the entire environment thoroughly to ensure no compatibility issues arise during runtime.
+
+If you decide to proceed with the upgrade, it may require some adjustments and thorough testing to ensure everything works as expected.

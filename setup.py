@@ -23,10 +23,11 @@ def get_version(rel_path: str) -> str:
 # Package meta-data.
 NAME = "pyqlib"
 DESCRIPTION = "A Quantitative-research Platform"
-REQUIRES_PYTHON = ">=3.5.0"
+REQUIRES_PYTHON = ">=3.6.0, <3.11"
 
 VERSION = get_version("qlib/__init__.py")
 
+"""
 # Detect Cython
 try:
     import Cython
@@ -40,11 +41,17 @@ if not _CYTHON_INSTALLED:
     print("Required Cython version >= 0.28 is not detected!")
     print('Please run "pip install --upgrade cython" first.')
     exit(-1)
+"""
 
 # What packages are required for this module to be executed?
 # `estimator` may depend on other packages. In order to reduce dependencies, it is not written here.
 REQUIRED = [
-    "numpy>=1.12.0, <1.24",
+    "cython>=0.28",
+
+    # "numpy>=1.12.0, <1.24",
+    # numba 0.60.0 requires numpy<2.1,>=1.22
+    "numpy>=1.22, <1.25",
+
     "pandas>=0.25.1",
     "scipy>=1.7.3",
     "requests>=2.18.0",
@@ -54,7 +61,10 @@ REQUIRED = [
     "python-redis-lock>=3.3.1",
     "schedule>=0.6.0",
     "cvxpy>=1.0.21",
-    "hyperopt==0.1.2",
+
+    # "hyperopt==0.1.2",
+    "hyperopt>=0.1.2",
+
     "fire>=0.3.1",
     "statsmodels",
     "xlrd>=1.0.0",
@@ -64,28 +74,41 @@ REQUIRED = [
     "pyyaml>=5.3.1",
     # To ensure stable operation of the experiment manager, we have limited the version of mlflow,
     # and we need to verify whether version 2.0 of mlflow can serve qlib properly.
-    "mlflow>=1.12.1, <=1.30.0",
+    # "mlflow>=1.12.1, <=1.30.0",
+    "mlflow",
+
     # mlflow 1.30.0 requires packaging<22, so we limit the packaging version, otherwise the CI will fail.
-    "packaging<22",
+    # "packaging<22",
+
     "tqdm",
     "loguru",
     "lightgbm>=3.3.0",
     "tornado",
     "joblib>=0.17.0",
+
     # With the upgrading of ruamel.yaml to 0.18, the safe_load method was deprecated,
     # which would cause qlib.workflow.cli to not work properly,
     # and no good replacement has been found, so the version of ruamel.yaml has been restricted for now.
     # Refs: https://pypi.org/project/ruamel.yaml/
-    "ruamel.yaml<=0.17.36",
-    "pymongo==3.7.2",  # For task management
+    # "ruamel.yaml<=0.17.36",
+    # "ruamel.yaml",
+
+    # "pymongo==3.7.2",  # For task management
+    "pymongo",
+
     "scikit-learn>=0.22",
     "dill",
-    "dataclasses;python_version<'3.7'",
+
+    #"dataclasses;python_version<'3.7'",
+    "dataclasses",
+
     "filelock",
     "jinja2",
     "gym",
     # Installing the latest version of protobuf for python versions below 3.8 will cause unit tests to fail.
-    "protobuf<=3.20.1;python_version<='3.8'",
+    # "protobuf<=3.20.1;python_version<='3.8'",
+    "protobuf",
+
     "cryptography",
 ]
 
@@ -146,13 +169,18 @@ setup(
             "wheel",
             "setuptools",
             "black",
+
             # Version 3.0 of pylint had problems with the build process, so we limited the version of pylint.
-            "pylint<=2.17.6",
+            # "pylint<=2.17.6",
+            "pylint",
+
             # Using the latest versions(0.981 and 0.982) of mypy,
             # the error "multiprocessing.Value()" is detected in the file "qlib/rl/utils/data_queue.py",
             # If this is fixed in a subsequent version of mypy, then we will revert to the latest version of mypy.
             # References: https://github.com/python/typeshed/issues/8799
-            "mypy<0.981",
+            #"mypy<0.981",
+            "mypy",
+
             "flake8",
             "nbqa",
             "jupyter",
@@ -160,7 +188,8 @@ setup(
             # The 5.0.0 version of importlib-metadata removed the deprecated endpoint,
             # which prevented flake8 from working properly, so we restricted the version of importlib-metadata.
             # To help ensure the dependencies of flake8 https://github.com/python/importlib_metadata/issues/406
-            "importlib-metadata<5.0.0",
+            # "importlib-metadata<5.0.0",
+            # "importlib-metadata",
             "readthedocs_sphinx_ext",
             "cmake",
             "lxml",
@@ -168,7 +197,9 @@ setup(
             "yahooquery",
             # 2024-05-30 scs has released a new version: 3.2.4.post2,
             # this version, causes qlib installation to fail, so we've limited the scs version a bit for now.
-            "scs<=3.2.4",
+            # "scs<=3.2.4",
+            "scs",
+
             "beautifulsoup4",
             # In version 0.4.11 of tianshou, the code:
             # logits, hidden = self.actor(batch.obs, state=state, info=batch.info)
@@ -177,11 +208,18 @@ setup(
             # so we restricted the version of tianshou.
             # References:
             # https://github.com/thu-ml/tianshou/releases
-            "tianshou<=0.4.10",
+            # "tianshou<=0.4.10",
+            "tianshou",
+
             "gym>=0.24",  # If you do not put gym at the end, gym will degrade causing pytest results to fail.
+            "catboost",
+            "xgboost",
+            "seaborn",
+            "arctic",
         ],
         "rl": [
-            "tianshou<=0.4.10",
+            # "tianshou<=0.4.10",
+            "tianshou",
             "torch",
         ],
     },
@@ -200,5 +238,6 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ],
 )

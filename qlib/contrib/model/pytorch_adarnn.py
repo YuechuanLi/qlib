@@ -155,6 +155,7 @@ class ADARNN(Model):
         criterion = nn.MSELoss()
         dist_mat = torch.zeros(self.num_layers, self.len_seq).to(self.device)
         len_loader = np.inf
+        out_weight_list = None
         for loader in train_loader_list:
             if len(loader) < len_loader:
                 len_loader = len(loader)
@@ -210,7 +211,7 @@ class ADARNN(Model):
                 weight_mat = self.model.update_weight_Boosting(weight_mat, dist_old, dist_mat)
             return weight_mat, dist_mat
         else:
-            weight_mat = self.transform_type(out_weight_list)
+            weight_mat = self.transform_type(out_weight_list) if out_weight_list is not None else None
             return weight_mat, None
 
     @staticmethod
@@ -571,6 +572,7 @@ class TransferLoss:
         Returns:
             [tensor] -- transfer loss
         """
+        loss = None
         if self.loss_type in ("mmd_lin", "mmd"):
             mmdloss = MMD_loss(kernel_type="linear")
             loss = mmdloss(X, Y)

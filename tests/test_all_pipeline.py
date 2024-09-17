@@ -187,5 +187,5 @@ def suite():
 
 
 if __name__ == "__main__":
-    runner = unittest.TextTestRunner()
+    runner = unittest.TextTestRunner(enable_profiler=True)
     runner.run(suite())

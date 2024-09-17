@@ -53,7 +53,8 @@ class InfoCollector:
             "tornado",
             "joblib",
             "fire",
-            "ruamel.yaml",
+            # "ruamel.yaml",
+            "yaml",
         ]
 
         for package in REQUIRED:
