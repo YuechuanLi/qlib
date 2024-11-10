@@ -226,7 +226,7 @@ class SFM(Model):
         self.dropout_W = dropout_W
         self.dropout_U = dropout_U
         self.n_epochs = n_epochs
-        self.lr = lr
+        self.lr = float(lr)
         self.metric = metric
         self.batch_size = batch_size
         self.early_stop = early_stop

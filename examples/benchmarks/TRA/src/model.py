@@ -67,7 +67,7 @@ class TRAModel(Model):
 
         self.model_config = model_config
         self.tra_config = tra_config
-        self.lr = lr
+        self.lr = float(lr)
         self.n_epochs = n_epochs
         self.early_stop = early_stop
         self.smooth_steps = smooth_steps
