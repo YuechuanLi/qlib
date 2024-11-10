@@ -49,3 +49,5 @@ tags
 
 ./pretrain
 .idea/
+examples/output
+examples/catboost_info
