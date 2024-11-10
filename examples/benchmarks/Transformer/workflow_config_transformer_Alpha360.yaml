@@ -48,7 +48,14 @@ task:
         module_path: qlib.contrib.model.pytorch_transformer
         kwargs:
             d_feat: 6
+            d_model: 512
+            batch_size: 512
+            nhead: 8
+            num_layers: 6
+            dropout: 0.1
+            n_epochs: 50
             seed: 0
+            early_stop: 10
     dataset:
         class: DatasetH
         module_path: qlib.data.dataset
